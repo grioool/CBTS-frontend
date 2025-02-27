@@ -1,0 +1,59 @@
+#root {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #397563;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(215, 23, 23, 0.1);
+}
+
+.card {
+  padding: 2em;
+  background-color: #3b3030;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+input[type="file"],
+select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #397563;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #6e8f85;
+}
+
+.summary-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  text-align: left;
+}

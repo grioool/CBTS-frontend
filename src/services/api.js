@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://cbts-backend-854061077838.europe-central2.run.app/docs#/default/summarize_file_summarize_post'
+const BASE_URL = 'https://cbts-backend-854061077838.europe-central2.run.app'
 
 export const summarizeFile = (file, summaryType, summaryStyle) => {
   const formData = new FormData();

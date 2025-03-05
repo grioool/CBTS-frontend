@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {loginUser, LoginData, Token} from '../services/authService';
+import {loginUser} from '../services/authService';
 import {useNavigate} from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
@@ -22,7 +22,6 @@ const LoginPage: React.FC = () => {
             }
         } catch (err) {
             console.error('Login error:', err);
-            setError('Login failed. Please check your credentials.');
         }
     };
 
@@ -49,7 +48,6 @@ const LoginPage: React.FC = () => {
                     />
                 </div>
 
-                {/* Password */}
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
@@ -68,7 +66,6 @@ const LoginPage: React.FC = () => {
                     />
                 </div>
 
-                {/* Submit Button */}
                 <button
                     type="submit"
                     className="btn btn-primary w-full py-2"

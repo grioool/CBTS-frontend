@@ -16,6 +16,7 @@ export interface LoginData {
 export interface Token {
     access_token: string;
     token_type: string;
+    is_admin: boolean;
 }
 
 export async function registerUser(data: RegistrationData) {

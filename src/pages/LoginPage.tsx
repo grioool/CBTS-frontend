@@ -9,17 +9,20 @@ const LoginPage: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
-        const data: LoginData = {
-            username,
-            password,
-        };
         try {
-            const token: Token = await loginUser(data);
-            localStorage.setItem('access_token', token.access_token);
-            navigate('/history');
-        } catch (error) {
-            console.error('Login error:', error);
+            const tokenData = await loginUser({username, password});
+            localStorage.setItem('access_token', tokenData.access_token);
+
+            if (tokenData.is_admin) {
+                localStorage.setItem('isAdmin', 'true');
+                navigate('/admin/analytics');
+            } else {
+                localStorage.setItem('isAdmin', 'false');
+                navigate('/history');
+            }
+        } catch (err) {
+            console.error('Login error:', err);
+            setError('Login failed. Please check your credentials.');
         }
     };
 

@@ -3,26 +3,29 @@ import {Link, useNavigate} from 'react-router-dom';
 
 const NavBar: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const checkLoginStatus = () => {
         const token = localStorage.getItem('access_token');
+        const adminFlag = localStorage.getItem('isAdmin') === 'true';
         setIsLoggedIn(!!token);
+        setIsAdmin(adminFlag);
     };
 
     useEffect(() => {
         checkLoginStatus();
-
         const intervalId = setInterval(checkLoginStatus, 1000);
         return () => clearInterval(intervalId);
     }, []);
 
     const handleLogout = () => {
         localStorage.removeItem('access_token');
+        localStorage.removeItem('isAdmin');
         setIsLoggedIn(false);
+        setIsAdmin(false);
         navigate('/');
     };
-
 
     return (
         <nav className="bg-gray-800 p-7">
@@ -45,6 +48,13 @@ const NavBar: React.FC = () => {
                                 User History
                             </Link>
                         </li>
+                        {isAdmin && (
+                            <li>
+                                <Link to="/admin/analytics" className="text-white hover:text-gray-300">
+                                    Admin Panel
+                                </Link>
+                            </li>
+                        )}
                         <li>
                             <button
                                 onClick={handleLogout}

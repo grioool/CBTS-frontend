@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://terraform-cbts-backend-854061077838.europe-central2.run.app'
+const BASE_URL = 'https://cbts-backend-854061077838.europe-central2.run.app'
 
 export interface RegistrationData {
     username: string;

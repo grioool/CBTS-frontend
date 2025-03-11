@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {loginUser} from '../services/authService';
 import {useNavigate} from 'react-router-dom';
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
@@ -13,23 +15,40 @@ const LoginPage: React.FC = () => {
             const tokenData = await loginUser({username, password});
             localStorage.setItem('access_token', tokenData.access_token);
 
+            toast.success('Login successful! Redirecting...');
+
             if (tokenData.is_admin) {
                 localStorage.setItem('isAdmin', 'true');
-                navigate('/admin/analytics');
+                setTimeout(() => {
+                    navigate('/admin/analytics');
+                }, 1500);
             } else {
                 localStorage.setItem('isAdmin', 'false');
-                navigate('/history');
+                setTimeout(() => {
+                    navigate('/history');
+                }, 1500);
             }
-        } catch (err) {
-            console.error('Login error:', err);
+        } catch (error: any) {
+            console.error('Login error:', error);
+            if (error.response) {
+                const statusCode = error.response.status;
+                const errorMessage =
+                    error.response.data?.message || 'Incorrect username or password';
+                toast.error(`Error ${statusCode}: ${errorMessage}`);
+            } else {
+                toast.error('Network error. Please try again later.');
+            }
         }
     };
 
     return (
         <div className="container mx-auto p-4">
+            <ToastContainer/>
             <h1 className="text-xl font-bold mb-4">Login</h1>
-            <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                {/* Username */}
+            <form
+                onSubmit={handleSubmit}
+                className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+            >
                 <div className="mb-4">
                     <label
                         className="block text-gray-700 text-sm font-bold mb-2"
@@ -66,10 +85,7 @@ const LoginPage: React.FC = () => {
                     />
                 </div>
 
-                <button
-                    type="submit"
-                    className="btn btn-primary w-full py-2"
-                >
+                <button type="submit" className="btn btn-primary w-full py-2">
                     Login
                 </button>
             </form>

@@ -1,5 +1,5 @@
-import React, {useState, ChangeEvent, FormEvent} from 'react';
-import {summarizeFile, SummarizeResponse} from '../services/summaryService.ts';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { summarizeFile, SummarizeResponse } from '../services/summaryService.ts';
 
 const SummaryPage: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -33,11 +33,19 @@ const SummaryPage: React.FC = () => {
             setError('');
         } catch (err: any) {
             console.error('Summarization error:', err);
-            let errorMessage = err.response?.data?.message || 'An error occurred while generating the summary.';
-            if (err.response?.status) {
-                errorMessage = `Error ${err.response.status}: ${errorMessage}`;
+
+            const statusCode = err.response?.status;
+            const detailMessage = err.response?.data?.detail || 'An error occurred while generating the summary.';
+
+            if (statusCode === 423) {
+                setError('Your account is locked or you have reached your daily limit.');
+            } else if (statusCode === 429) {
+                setError('You have reached your daily summary limit.');
+            } else if (statusCode) {
+                setError(`Error code ${detailMessage}`);
+            } else {
+                setError(detailMessage);
             }
-            setError(errorMessage);
         }
     };
 

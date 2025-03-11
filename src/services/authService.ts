@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://cbts-backend-854061077838.europe-central2.run.app'
-
 export interface RegistrationData {
     username: string;
     password: string;
@@ -20,7 +18,7 @@ export interface Token {
 }
 
 export async function registerUser(data: RegistrationData) {
-    const response = await axios.post(`${BASE_URL}/auth/registration`, data);
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/registration`, data);
     return response.data;
 }
 
@@ -29,7 +27,7 @@ export async function loginUser(data: LoginData): Promise<Token> {
     params.append('username', data.username);
     params.append('password', data.password);
 
-    const response = await axios.post(`${BASE_URL}/auth/login`, params, {
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/login`, params, {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     });
     return response.data;
@@ -37,7 +35,7 @@ export async function loginUser(data: LoginData): Promise<Token> {
 
 export async function refreshToken(oldToken: string): Promise<Token> {
     const response = await axios.post(
-        `${BASE_URL}/refresh`,
+        `${import.meta.env.VITE_BASE_URL}/refresh`,
         {},
         {
             headers: {

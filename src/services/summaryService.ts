@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://cbts-backend-854061077838.europe-central2.run.app'
-
 export interface SummarizeResponse {
     summary: string;
     file_path: string;
@@ -16,7 +14,7 @@ export async function summarizeFile(
     const formData = new FormData();
     formData.append('file', file);
 
-    const url = `${BASE_URL}/summary/summarize?length=${encodeURIComponent(length)}&style=${encodeURIComponent(style)}`;
+    const url = `${import.meta.env.VITE_BASE_URL}/summary/summarize?length=${encodeURIComponent(length)}&style=${encodeURIComponent(style)}`;
 
     const response = await axios.post(url, formData, {
         headers: {

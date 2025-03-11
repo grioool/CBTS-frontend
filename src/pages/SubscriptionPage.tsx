@@ -10,7 +10,7 @@ const SubscriptionPage: React.FC = () => {
     const handleSubscription = async () => {
         setLoading(true);
         try {
-            const response = await axios.post('/subscription', {subscriptionType});
+            const response = await axios.post('https://cbts-backend-854061077838.europe-central2.run.app/subscription', {subscriptionType});
             const stripeUrl = response.data.stripeUrl;
             toast.success(`Redirecting to Stripe for ${subscriptionType} subscription...`);
 

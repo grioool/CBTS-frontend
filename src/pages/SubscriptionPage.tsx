@@ -1,13 +1,11 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import {useNavigate} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SubscriptionPage: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [subscriptionType, setSubscriptionType] = useState<'Premium' | 'Enterprise'>('Premium');
-    const navigate = useNavigate();
 
     const handleSubscription = async () => {
         setLoading(true);

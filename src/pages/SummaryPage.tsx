@@ -33,7 +33,11 @@ const SummaryPage: React.FC = () => {
             setError('');
         } catch (err: any) {
             console.error('Summarization error:', err);
-            setError('An error occurred while generating the summary.');
+            let errorMessage = err.response?.data?.message || 'An error occurred while generating the summary.';
+            if (err.response?.status) {
+                errorMessage = `Error ${err.response.status}: ${errorMessage}`;
+            }
+            setError(errorMessage);
         }
     };
 
@@ -44,7 +48,6 @@ const SummaryPage: React.FC = () => {
                 onSubmit={handleSubmit}
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
             >
-                {/* File Input */}
                 <div className="form-group mb-4">
                     <label
                         htmlFor="file"
@@ -60,7 +63,6 @@ const SummaryPage: React.FC = () => {
                     />
                 </div>
 
-                {/* Length Selector */}
                 <div className="form-group mb-4">
                     <label
                         htmlFor="length"
@@ -81,7 +83,6 @@ const SummaryPage: React.FC = () => {
                     </select>
                 </div>
 
-                {/* Style Selector */}
                 <div className="form-group mb-4">
                     <label
                         htmlFor="style"
@@ -101,7 +102,6 @@ const SummaryPage: React.FC = () => {
                         <option value="simple">Simple</option>
                     </select>
                 </div>
-                {/* Submit Button */}
                 <button type="submit" className="btn btn-primary w-full py-2">
                     Generate Summary
                 </button>

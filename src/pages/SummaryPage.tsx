@@ -40,7 +40,7 @@ const SummaryPage: React.FC = () => {
             if (statusCode === 423) {
                 setError('Your account is locked or you have reached your daily limit.');
             } else if (statusCode === 429) {
-                setError('You have reached your daily summary limit.');
+                setError('You have reached your daily summary limit. Please, buy subscription :)');
             } else if (statusCode) {
                 setError(`Error code ${detailMessage}`);
             } else {

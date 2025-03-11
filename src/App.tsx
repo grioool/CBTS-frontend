@@ -6,6 +6,7 @@ import UserHistoryPage from './pages/UserHistoryPage';
 import HomePage from './pages/HomePage';
 import NavBar from './components/NavBar';
 import AdminPage from './pages/AdminPage';
+import SubscriptionPage from './pages/SubscriptionPage';
 
 const App: React.FC = () => {
     return (
@@ -19,6 +20,7 @@ const App: React.FC = () => {
                     <Route path="/summary" element={<SummaryPage/>}/>
                     <Route path="/history" element={<UserHistoryPage/>}/>
                     <Route path="/admin/analytics" element={<AdminPage/>}/>
+                    <Route path="/subscription" element={<SubscriptionPage/>}/>
                 </Routes>
             </div>
         </Router>

@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const NavBar: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -35,7 +35,6 @@ const NavBar: React.FC = () => {
                         Home
                     </Link>
                 </li>
-
                 {isLoggedIn ? (
                     <>
                         <li>
@@ -46,6 +45,11 @@ const NavBar: React.FC = () => {
                         <li>
                             <Link to="/history" className="text-white hover:text-gray-300">
                                 User History
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/subscription" className="text-white hover:text-gray-300">
+                                Subscribe
                             </Link>
                         </li>
                         {isAdmin && (

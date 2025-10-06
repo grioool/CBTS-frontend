@@ -45,3 +45,18 @@ export async function refreshToken(oldToken: string): Promise<Token> {
     );
     return response.data;
 }
+
+export async function requestPasswordReset(email: string) {
+    const response = await axios.post(`${BASE_URL}/auth/password/forgot`, {
+        email: email.trim(),
+    });
+    return response.data;
+}
+
+export async function resetPassword(token: string, newPassword: string) {
+    const response = await axios.post(`${BASE_URL}/auth/password/reset`, {
+        token,
+        new_password: newPassword,
+    });
+    return response.data;
+}

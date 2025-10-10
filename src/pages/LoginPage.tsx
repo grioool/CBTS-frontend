@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {loginUser} from '../services/authService';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -127,6 +127,10 @@ const LoginPage: React.FC = () => {
                 <button type="submit" disabled={submitting} className="btn btn-primary w-full py-2 disabled:opacity-50">
                     {submitting ? 'Signing in…' : 'Login'}
                 </button>
+
+                <Link className="btn btn-primary w-full py-2 disabled:opacity-50" to={"/auth/forgot"}>
+                    {"Forgot Password?"}
+                </Link>
             </form>
         </div>
     );

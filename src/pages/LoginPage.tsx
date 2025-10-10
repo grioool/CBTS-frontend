@@ -12,7 +12,7 @@ const usernameRules = (v: string) => {
     return '';
 };
 const passwordRules = (v: string) => {
-    if (v.length < 8) return 'Password must be at least 8 characters';
+    if (v.length < 1) return 'Password must be filled';
     return '';
 };
 
